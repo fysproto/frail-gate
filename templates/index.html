@@ -16,16 +16,14 @@
     <div class="card">
         <h1>フレイル測定を開始します</h1>
         <p>以下の内容でよろしければ、ボタンを押してください。</p>
-        
         <div class="info">
             イベント：{{ eid }}<br>
             個人ID：{{ uid }}
         </div>
-
         <form action="https://city.frail-yobo.jp/surveys" method="GET">
-         <input type="hidden" name="event_id" value="{{ eid }}">
-         <input type="hidden" name="personal_id" value="{{ uid }}">
-         <button type="submit">測定を始める（次へ）</button>
+            <input type="hidden" name="event_id" value="{{ eid }}">
+            <input type="hidden" name="personal_id" value="{{ uid }}">
+            <button type="submit">測定を始める（次へ）</button>
         </form>
     </div>
 </body>
