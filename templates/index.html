@@ -3,36 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フレイル測定 受付</title>
+    <title>フレイル測定ゲート</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f2f5; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h1 { font-size: 1.5rem; color: #333; }
+        .info { background: #eee; padding: 15px; border-radius: 5px; margin: 20px 0; font-weight: bold; }
+        button { background: #4285f4; color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1.2rem; cursor: pointer; width: 100%; }
+    </style>
 </head>
-<body style="text-align:center; padding-top:50px; font-family:sans-serif;">
-    <h2>フレイル測定を開始します</h2>
-    <p>以下の内容でよろしければ、ボタンを押してください。</p>
-
-    <form action="https://city.frail-yobo.jp/surveys" method="POST">
-        <input type="hidden" id="eid_field" name="eventId">
-        <input type="hidden" id="uid_field" name="personalId">
-
-        <div style="background:#f0f0f0; padding:20px; margin:20px; border-radius:10px;">
-            <p>イベント：<b id="disp_eid"></b></p>
-            <p>個人ID：<b id="disp_uid"></b></p>
+<body>
+    <div class="card">
+        <h1>フレイル測定を開始します</h1>
+        <p>以下の内容でよろしければ、ボタンを押してください。</p>
+        
+        <div class="info">
+            イベント：{{ eid }}<br>
+            個人ID：{{ uid }}
         </div>
 
-        <button type="submit" style="width:90%; height:100px; background:#4A90E2; color:white; font-size:24px; border:none; border-radius:15px; font-weight:bold;">
-            測定を始める（次へ）
-        </button>
-    </form>
-
-    <script>
-        // URLの ?eid=...&uid=... を読み取ってフォームに埋め込む
-        const params = new URLSearchParams(window.location.search);
-        const eid = params.get('eid');
-        const uid = params.get('uid');
-        
-        document.getElementById('eid_field').value = eid;
-        document.getElementById('uid_field').value = uid;
-        document.getElementById('disp_eid').innerText = eid;
-        document.getElementById('disp_uid').innerText = uid;
-    </script>
+        <form action="https://city.frail-yobo.jp/frails/surveys" method="POST">
+            <input type="hidden" name="event_id" value="{{ eid }}">
+            <input type="hidden" name="user_id" value="{{ uid }}">
+            <button type="submit">測定を始める（次へ）</button>
+        </form>
+    </div>
 </body>
 </html>
