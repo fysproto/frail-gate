@@ -1,13 +1,15 @@
 import os
 from flask import Flask, render_template, request
 
-app = Flask(__name__, template_folder='.')
+# 引数なしの Flask(__name__) で、自動的に templates フォルダを探します
+app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # URLパラメータを取得（表示用）
+    # URLから値を抜き出す
     eid = request.args.get('eid', '')
     uid = request.args.get('uid', '')
+    # templates/index.html を表示し、値を渡す
     return render_template('index.html', eid=eid, uid=uid)
 
 if __name__ == "__main__":
