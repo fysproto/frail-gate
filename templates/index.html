@@ -3,43 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フレイル測定ゲートウェイ</title>
+    <title>フレイル測定ゲート</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f0f4f8; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
-        .id-label { color: #666; font-size: 0.9rem; margin-bottom: 5px; }
-        .id-box { font-size: 2.2rem; font-weight: bold; color: #1a73e8; margin-bottom: 25px; letter-spacing: 2px; }
-        .btn-main { background: #1a73e8; color: white; border: none; padding: 18px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
-        .btn-main:active { background: #174ea6; transform: scale(0.98); }
-        .guide-text { font-size: 0.85rem; color: #888; margin-top: 20px; line-height: 1.5; }
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f2f5; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h1 { font-size: 1.5rem; color: #333; }
+        .info { background: #eee; padding: 15px; border-radius: 5px; margin: 20px 0; font-weight: bold; }
+        button { background: #4285f4; color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1.2rem; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="id-label">受付ID</div>
-        <div class="id-box">{{ uid }}</div>
+        <h1>フレイル測定を開始します</h1>
+        <p>以下の内容でよろしければ、ボタンを押してください。</p>
         
-        <button class="btn-main" onclick="goToSurvey()">測定を始める</button>
-        
-        <div class="guide-text">
-            ボタンを押すと測定サイトへ移動します。<br>
-            IDが自動で入力されない場合は、<br>
-            上のIDを長押しして入力してください。
+        <div class="info">
+            イベント：{{ eid }}<br>
+            個人ID：{{ uid }}
         </div>
-    </div>
 
-    <script>
-        function goToSurvey() {
-            // Flaskから渡された値をJavaScriptの変数に入れる
-            const eid = "{{ eid }}";
-            const uid = "{{ uid }}";
-            
-            // 正しいパラメータ名（eventId, personalId）でURLを作成
-            const targetUrl = "https://city.frail-yobo.jp/frails/surveys?eventId=" + eid + "&personalId=" + uid;
-            
-            // 移動
-            location.href = targetUrl;
-        }
-    </script>
+        <form action="https://city.frail-yobo.jp/surveys" method="GET">
+         <input type="hidden" name="event_id" value="{{ eid }}">
+         <input type="hidden" name="personal_id" value="{{ uid }}">
+         <button type="submit">測定を始める（次へ）</button>
+        </form>
+    </div>
 </body>
 </html>
