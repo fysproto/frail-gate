@@ -22,11 +22,10 @@
             個人ID：{{ uid }}
         </div>
 
-        <form action="https://city.frail-yobo.jp/frails/surveys" method="POST">
-            <input type="hidden" name="event_id" value="{{ eid }}">
-            <input type="hidden" name="user_id" value="{{ uid }}">
-            <button type="submit">測定を始める（次へ）</button>
-        </form>
+       <a href="https://city.frail-yobo.jp/frails/surveys?event_id={{ eid }}&user_id={{ uid }}" 
+   style="display: block; background: #4285f4; color: white; text-decoration: none; padding: 15px; border-radius: 5px; font-size: 1.2rem;">
+   測定を始める（次へ）
+</a>
     </div>
 </body>
 </html>
