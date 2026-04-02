@@ -30,12 +30,14 @@
 
     <script>
         function goToSurvey() {
-            // 特定した名前を使ってURLを組み立てる
+            // Flaskから渡された値をJavaScriptの変数に入れる
             const eid = "{{ eid }}";
             const uid = "{{ uid }}";
-            const targetUrl = `https://city.frail-yobo.jp/frails/surveys?eventId=${eid}&personalId=${uid}`;
             
-            // 別タブではなく、現在のタブで移動（セッションを維持しやすくするため）
+            // 正しいパラメータ名（eventId, personalId）でURLを作成
+            const targetUrl = "https://city.frail-yobo.jp/frails/surveys?eventId=" + eid + "&personalId=" + uid;
+            
+            // 移動
             location.href = targetUrl;
         }
     </script>
